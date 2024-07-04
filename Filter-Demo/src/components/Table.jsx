@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from 'react'
 
 function Table({filterData}) {
-    const [tableData, setTableData] = useState(filterData || [])
-    useEffect(() => {
-        setTableData(filterData)
-    })
     return (
-        <div style={{margin:10}}>
+        <div style={{height:150, margin:10}}>
             <table className='table' border={1}>
                 <thead>
                     <tr>
-                    {tableData && Object.keys(tableData[0])
+                    {filterData && Object.keys(filterData[0])
                         .map((item, index) => {
                             return <th key={index}>{item}</th>
                         })
@@ -18,7 +14,7 @@ function Table({filterData}) {
                     </tr>
                 </thead>
                 <tbody>
-                    {tableData && tableData.map((item, index) => {
+                    {filterData && filterData.map((item, index) => {
                         return ( 
                             <tr key={item.id}>
                                 <td>{item.id}</td>
