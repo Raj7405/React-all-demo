@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Table from './components/Table'
 import FiltlterButtons from './components/FiltlterButtons'
+import FilterButtons2 from './components/New'
 
 const defaultData = [
   {
@@ -55,6 +56,10 @@ function App() {
   return (
     <div className='flex flex-col flex-center'>
       <FiltlterButtons defaultData={defaultData} data={userData} setData={setData}/>
+      {/* <FilterButtons2  defaultData={defaultData} data={userData} setData={setData}/> */}
+      <div style={{height:100}}></div>
+      <h2>Reference Table</h2>
+      <Table filterData={defaultData}/>
     </div>
   )
 }
