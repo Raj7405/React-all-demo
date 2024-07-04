@@ -5,14 +5,12 @@ function Table({filterData}) {
     useEffect(() => {
         setTableData(filterData)
     })
-
-    // console.log('re-render', tableData)
     return (
-        <div>
+        <div style={{margin:10}}>
             <table className='table' border={1}>
                 <thead>
                     <tr>
-                    {Object.keys(tableData[0])
+                    {tableData && Object.keys(tableData[0])
                         .map((item, index) => {
                             return <th key={index}>{item}</th>
                         })
@@ -20,7 +18,7 @@ function Table({filterData}) {
                     </tr>
                 </thead>
                 <tbody>
-                    {tableData.map((item, index) => {
+                    {tableData && tableData.map((item, index) => {
                         return ( 
                             <tr key={item.id}>
                                 <td>{item.id}</td>
