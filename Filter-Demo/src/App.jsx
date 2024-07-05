@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Table from './components/Table'
-import FiltlterButtons from './components/FiltlterButtons'
+import FiltlterButtons from './components/FilterButtons'
 
 const defaultData = [
   {
@@ -10,7 +10,8 @@ const defaultData = [
     category:'one',
     type : 'A',
     active : 'false',
-    state : 'gujarat',      
+    state : 'gujarat',  
+    country: 'india',    
   },
   {
     id : 2,
@@ -20,6 +21,7 @@ const defaultData = [
     type : 'B',
     active : 'false',
     state : 'gujarat',
+    country: 'india', 
   },
   {
     id : 3,
@@ -28,7 +30,8 @@ const defaultData = [
     category:'one',
     type :'B',
     active : 'true',
-    state : 'gujarat',
+    state : 'goa',
+    country: 'india', 
   },
   {
     id : 4,
@@ -38,6 +41,7 @@ const defaultData = [
     type : 'C',
     active : 'false',
     state : 'gujarat',
+    country: 'india', 
   },
 ]
 
