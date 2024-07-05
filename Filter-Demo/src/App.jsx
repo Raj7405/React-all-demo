@@ -56,8 +56,6 @@ function App() {
   return (
     <div className='flex flex-col flex-center'>
       <FiltlterButtons defaultData={defaultData} data={userData} setData={setData}/>
-      {/* <Old  defaultData={defaultData} data={userData} setData={setData}/>
-      <div style={{height:100}}></div> */}
       <h2>Reference Table</h2>
       <Table filterData={defaultData}/>
     </div>
