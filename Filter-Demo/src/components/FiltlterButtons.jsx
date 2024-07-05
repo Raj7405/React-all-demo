@@ -12,13 +12,14 @@ function FiltlterButtons({defaultData, data}) {
         active:[],
         state:[],
     })
-
+    const [id, setId] = useState([])
     useEffect(() => {
         // console.log(filterCondition)
         let filteredData = defaultData;
+        let tempData = [];
 
+        console.log(Object.values(filterCondition).flat(Infinity))  
         for (const key in filterCondition) {
-            console.log(filterCondition[key])    
             // if (filterCondition[key].length) {
             //     filterCondition[key].map(keyToFind => {
             //         console.log(keyToFind)
@@ -28,13 +29,40 @@ function FiltlterButtons({defaultData, data}) {
             //         console.log(filterData)
             //     })
             // }
-            if (filterCondition[key].length) {
-                filterCondition[key].map(keyToFind => filteredData = defaultData.filter(item => defaultData.includes(keyToFind++)))
+            // if (filterCondition[key].length) {
+                // let tempCondition = Object.values(filterCondition).flat(Infinity)
+            //     console.log(Object.values(filterCondition).flat(Infinity))
+            //     tempData = tempCondition.map(item => defaultData.filter(obj => Object.values(obj).includes(item)))
+            //     // filteredData = filterCondition[key].map(keyToFind  => defaultData.filter(item => item[key] === keyToFind))
+            //     filteredData = defaultData.filter(itemObj => filterCondition[key].includes(itemObj[key]))
+            // }
+            if(filterCondition[key].length){
+                tempData.push(filteredData.filter(obj => {
+                    // if(filterCondition[key].includes(obj[key])){
+
+                    //     let uniqueId = [...new Set([...id, obj.id])]
+                    //     console.log(uniqueId)
+                    //     setId(uniqueId)
+                    // }
+                    return filterCondition[key].includes(obj[key])
+                }))
             }
         }
-        console.log(filteredData)
+     
+        // if(filterCondition2.length){
+        //    console.log(filterCondition2.map(key => defaultData.filter(obj => Object.values(obj).includes(key))) )
+        // }
+        // console.log(filteredData.flat(Infinity))
+        console.log(tempData.flat(Infinity))
+        const keys = ['id', 'name'];    
+        const filteredDataId = tempData.flat(Infinity).filter((value, index, self) =>
+            self.findIndex(v => keys.every(k => v[k] === value[k])) === index
+          );
+          
+          console.log(filteredDataId);
+        // setFilterData(filteredData.length ? filteredData.flat(Infinity) : data);
+        setFilterData(filteredDataId.length ? filteredDataId.flat(Infinity) : data);
 
-        setFilterData(filteredData.length ? filteredData : data);
     },[filterCondition, defaultData])
 
  
@@ -46,9 +74,10 @@ function FiltlterButtons({defaultData, data}) {
     const handleSelectedKey = (e) => {
         const key = e.target.name;
         const value = e.target.id;
+        console.log(filterCondition[key].includes(value))
         setFilterConidition(prevState => ({
             ...prevState,
-            [key]: [...prevState[key], value]
+            [key]: prevState[key].includes(value) ?  prevState[key].filter(item => item !== value): [...prevState[key], value],
         }));
     }
 
