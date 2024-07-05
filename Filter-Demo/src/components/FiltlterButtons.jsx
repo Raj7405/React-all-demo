@@ -1,69 +1,68 @@
-import React, { useEffect, useState } from 'react'
-import Table from './Table'
+import React, { useEffect, useState } from 'react';
+import Table from './Table';
 
-function FiltlterButtons({defaultData, data}) {
-    const [filterData, setFilterData] = useState(data) 
-    // const [filterData2, setFilterData2] = useState(data) 
-    const [filterCondition, setFilterConidition] = useState({})
+function FiltlterButtons({ defaultData, data }) {
+    const [filterData, setFilterData] = useState(data);
+    const [filterCondition, setFilterCondition] = useState({
+        city: [],
+        state: [],
+        type: [],
+        category: [],
+        active: [],
+    });
 
     useEffect(() => {
         let filteredData = defaultData;
-
-        for (const key in filterCondition) {
-            if (filterCondition[key]) {
-                filteredData = filteredData.filter(item => item[key] === filterCondition[key]);
+        Object.keys(filterCondition).forEach(key => {
+            if (filterCondition[key].length) {
+                filteredData = filteredData.filter(item =>
+                    filterCondition[key].includes(item[key])
+                );
             }
-        }
+        })
+        setFilterData(filteredData);
+    }, [filterCondition, defaultData]);
 
-        setFilterData(filteredData.length ? filteredData : null);
-    },[filterCondition, defaultData])
-
- 
-    const uniqueItem = (key) => {
+    const uniqueItem = key => {
         const itemArr = data.map(item => item[key]);
         return [...new Set(itemArr)];
-    }
+    };
 
-    // const filterOutData = (selectedKey, data) =>{
-    //     let temp = (data ? data : []).filter((item) => Object.values(item).includes(selectedKey))
-    //     return (temp.length ? temp : null)
-    // }  
-    
-    const handleSelectedKey = (e) => {
+    const handleSelectedKey = e => {
         const key = e.target.name;
         const value = e.target.id;
-        setFilterConidition(prevState => ({
+        setFilterCondition(prevState => ({
             ...prevState,
-            [key]: value
+            [key]: prevState[key].includes(value)
+                ? prevState[key].filter(item => item !== value)
+                : [...prevState[key], value],
         }));
-    }
-
+    };
 
     return (
         <div>
             <div className='flex gap'>
-                {Object
-                    .keys(data[0])
-                    .filter((keysArr) => keysArr!='id' && keysArr!='name')
-                    .map((keys, index) => {
-                        return(
-                            <div id={keys} key={keys+index} className='flex flex-col gap'>
-                                {uniqueItem(keys).map((item,i) => {
-                                    return (
-                                        <div key={item+i}>
-                                            <input type='radio' id={item} name={keys} onChange={handleSelectedKey}/>
-                                            <label htmlFor={item}>{item}</label>
-                                        </div>
-                                    )
-                                })}
-                            </div>
-                        ) 
-                    }
-                )}
+                {Object.keys(data[0])
+                    .filter(keysArr => keysArr !== 'id' && keysArr !== 'name')
+                    .map((keys, index) => (
+                        <div id={keys} key={keys + index} className='flex flex-col gap'>
+                            {uniqueItem(keys).map((item, i) => (
+                                <div key={item + i}>
+                                    <input
+                                        type='checkbox'
+                                        id={item}
+                                        name={keys}
+                                        onChange={handleSelectedKey}
+                                    />
+                                    <label htmlFor={item}>{item}</label>
+                                </div>
+                            ))}
+                        </div>
+                    ))}
             </div>
-            <Table filterData={filterData}/>
+            <Table filterData={filterData} />
         </div>
-    )
+    );
 }
 
-export default FiltlterButtons
+export default FiltlterButtons;

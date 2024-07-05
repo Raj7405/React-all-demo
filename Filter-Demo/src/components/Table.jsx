@@ -3,14 +3,17 @@ import React, { useEffect, useState } from 'react'
 function Table({filterData}) {
     const [tableData, setTableData] = useState(filterData || [])
     useEffect(() => {
+        console.log(filterData)
         setTableData(filterData)
-    })
+    },[filterData])
     return (
+    
         <div style={{margin:10}}>
+            {tableData.length ?   
             <table className='table' border={1}>
                 <thead>
                     <tr>
-                    {tableData && Object.keys(tableData[0])
+                    {Object.keys(tableData[0])
                         .map((item, index) => {
                             return <th key={index}>{item}</th>
                         })
@@ -18,7 +21,7 @@ function Table({filterData}) {
                     </tr>
                 </thead>
                 <tbody>
-                    {tableData && tableData.map((item, index) => {
+                    {tableData.map((item, index) => {
                         return ( 
                             <tr key={item.id}>
                                 <td>{item.id}</td>
@@ -33,7 +36,9 @@ function Table({filterData}) {
                     })}
                 </tbody>
             </table>
+            : <h2 style={{textAlign:'center'}}>No Match found!</h2>}
         </div>
+      
      )
 }
 

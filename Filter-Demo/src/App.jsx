@@ -1,22 +1,21 @@
 import { useState } from 'react'
 import Table from './components/Table'
 import FiltlterButtons from './components/FiltlterButtons'
-import FilterButtons2 from './components/New'
 
 const defaultData = [
   {
     id : 1,
     name : 'rajendra',
-    city : 'ankleshwar',
+    city : 'dellas',
     category:'one',
     type : 'A',
-    active : 'true',
+    active : 'false',
     state : 'gujarat',      
   },
   {
     id : 2,
     name : 'sammed',
-    city : 'ankleshwar',
+    city : 'dellas',
     category:'one',
     type : 'B',
     active : 'false',
@@ -25,26 +24,17 @@ const defaultData = [
   {
     id : 3,
     name : 'saurabh',
-    city : 'bharuch',
-    category:'two',
-    type : 'A',
+    city : 'san francisco',
+    category:'one',
+    type :'B',
     active : 'true',
     state : 'gujarat',
   },
   {
     id : 4,
     name : 'raj',
-    city : 'surat',
+    city : 'denver',
     category:'two',
-    type : 'C',
-    active : 'true',
-    state : 'gujarat',
-  },
-  {
-    id : 5,
-    name : 'mayur',
-    city : 'surat',
-    category:'one',
     type : 'C',
     active : 'false',
     state : 'gujarat',
