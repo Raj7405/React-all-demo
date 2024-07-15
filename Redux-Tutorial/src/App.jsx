@@ -1,8 +1,21 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import Header from './feature/header/Header'
+import TodoList from './feature/todos/TodoList'
+import Footer from './feature/footer/Footer'
 
 
 function App() {
-  const [count, setCount] = useState(0)
+  // useEffect(() =>{ 
+  //   localStorage.setItem('todos', JSON.stringify([
+  //     {
+  //       todos:{
+  //         id:0, 
+  //         text: 'Learn JavaScript',
+  //         completed: true,
+  //       } 
+  //     }
+  //   ]))  
+  // },[])
 
   return (
     <div className="App">
@@ -14,8 +27,13 @@ function App() {
           </div>
         </section>
       </nav>
-      <section>
-        <h2>Welcome to the Redux Fundamentals example app!</h2>
+      <section className="medium-container">
+          <h2>Todos</h2>
+          <div className="todoapp">
+            <Header />
+            <TodoList />
+            <Footer />
+          </div>
       </section>
     </div>
   )
