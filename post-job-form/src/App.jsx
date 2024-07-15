@@ -1,15 +1,25 @@
-import { useState } from 'react'                
-import './App.css'
+import './style/app.css'             
 import Form from './components/Form'
+import NavigationBtn from './components/NavigationBtn'
+import SideBar from './components/SideBar'
+import { useEffect, useState } from 'react'
+import {useSelector} from 'react-redux'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const jobDescription = useSelector(store => store.jobDescription)
 
   return (
-    <>
-      <h1>Hello</h1>
-      <Form/>
-    </>
+    <div className='appDiv'> 
+      <div className='sideBar'>
+        <h1>Side Nav Bar</h1>
+        <SideBar/>
+      </div>
+      <div className='formSection'>
+        <Form/>
+        <NavigationBtn/>
+      </div>
+
+    </div>
   )
 }
 
