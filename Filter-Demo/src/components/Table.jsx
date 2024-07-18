@@ -1,40 +1,43 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 
-function Table({filterData}) {
-    const [tableData, setTableData] = useState(filterData || [])
-    useEffect(() => {
-        setTableData(filterData)
-    })
-    return (
-        <div style={{margin:10}}>
-            <table className='table' border={1}>
-                <thead>
-                    <tr>
-                    {tableData && Object.keys(tableData[0])
-                        .map((item, index) => {
-                            return <th key={index}>{item}</th>
-                        })
-                    } 
-                    </tr>
-                </thead>
-                <tbody>
-                    {tableData && tableData.map((item, index) => {
-                        return ( 
-                            <tr key={item.id}>
-                                <td>{item.id}</td>
-                                <td>{item.name}</td>
-                                <td>{item.city}</td>
-                                <td>{item.category}</td>
-                                <td>{item.type}</td>
-                                <td>{JSON.stringify(item.active)}</td>
-                                <td>{item.state}</td> 
-                            </tr>
-                        )
-                    })}
-                </tbody>
-            </table>
-        </div>
-     )
+function Table({ filterData }) {
+  const [tableData, setTableData] = useState(filterData || []);
+  useEffect(() => {
+    setTableData(filterData);
+  }, [filterData]);
+  return (
+    <div style={{ margin: 10, height:100}}>
+      {tableData.length ? (
+        <table className="table" border={1} style={{width:500}}>
+          <thead>
+            <tr>
+              {Object.keys(tableData[0]).map((item, index) => {
+                return <th key={index}>{item}</th>;
+              })}
+            </tr>
+          </thead>
+          <tbody>
+            {tableData.map((item,index,self) => {
+              return (
+                <tr key={item.id}>                    
+                  <td>{item.id}</td>
+                  <td>{item.name}</td>
+                  <td>{item.city}</td>
+                  <td>{item.category}</td>
+                  <td>{item.type}</td>
+                  <td>{JSON.stringify(item.active)}</td>
+                  <td>{item.state}</td>
+                  <td>{item.country}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      ) : (
+        <h2 style={{ textAlign: "center" }}>No Match found!</h2>
+      )}
+    </div>
+  );
 }
 
-export default Table
+export default Table;
